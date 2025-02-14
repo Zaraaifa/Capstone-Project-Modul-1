@@ -1,21 +1,28 @@
 from .fungsi_cek import cek_kemiskinan
-from .fungsi_add import generate_rand_uniq_number
+from .fungsi_add import generate_rand_uniq_number, input_data
+from .fungsi_confirm import konfirmasi
 from tabulate import tabulate
 
 data_kelurahan = ['Hargorejo', 'Hargowilis', 'Sendangsari']
 
 def update_data(database):
     while True:
-        nama = input("Masukkan nama yang data nya ingin diperbarui: ").capitalize()
+        nama = input_data('Nama Kepala Keluarga', 'isalpha', 'huruf', data_kelurahan)
         matched_data = [data for data in database if data['Nama'] == nama]
+        
         if not matched_data:
             print("\n ❌Nama tidak ditemukan. Masukkan kembali\n")
             continue
         
-        print("Data ditemukan ✅")
+        print("✅ Data ditemukan ")
         print(tabulate(matched_data, headers="keys", tablefmt="fancy_grid", stralign="center"))
         
         id_pilihan = input("Masukkan ID data yang ingin diubah: ").upper().strip()
+        while True: 
+            if not id_pilihan.isalnum():
+                print("\n🚨 Data yang dimasukkan harus sesuai. Masukkan lagi.")
+            else: 
+                break
             
         for data in matched_data:
             if data['ID'] == id_pilihan:
@@ -25,61 +32,34 @@ def update_data(database):
                 print("3. Update Jumlah Anggota Keluarga")
                 print("4. Update Kelurahan")
 
-                try:
-                    pilihan = int(input("Pilih opsi yang ingin diubah (1/2/3/4): "))
-
-                    if pilihan == 1:
-                        while True:
-                            nama_baru = input("Masukkan nama kepala keluarga baru: ").capitalize().strip()
-                            if nama_baru.isalpha():
-                                data['Nama'] = nama_baru
-                                data['ID'] = generate_rand_uniq_number(data['Nama'], database)
-                                print(f"Nama berhasil diperbarui menjadi {nama_baru} dengan ID baru: {data['ID']}")
-                                break
-                            else:
-                                print('⛔ Input tidak berupa huruf. Masukkan lagi')
-                    if pilihan == 2:
-                        pendapatan_baru = input("Masukkan total pendapatan rumah tangga bulanan baru: ")
-                        if pendapatan_baru.isdigit():
-                            data['Pendapatan'] = int(pendapatan_baru) 
-                            pendapatan_perkapita = int(data['Pendapatan']//data['Anggota_Keluarga'])
-                            data['Pendapatan_Perkapita'] = pendapatan_perkapita 
-                        else:
-                            print('⛔Input tidak berupa angka. Masukkan lagi')
-        
-                    elif pilihan == 3:
-                        data_keluarga_baru = input("Masukkan data anggota keluarga baru: ")
-                        if (data_keluarga_baru).isdigit():
-                            data['Anggota_Keluarga'] = int(data_keluarga_baru)
-                            if data['Anggota_Keluarga'] > 0:
-                                pendapatan_perkapita = int(data['Pendapatan']//data['Anggota_Keluarga'])
-                                data['Pendapatan_Perkapita'] = pendapatan_perkapita 
-                            else:
-                                print("⚠️Masukkan angka pendapatan yang sesuai")
-                        else:
-                            print('⛔Input tidak berupa angka. Masukkan lagi')
-                            continue
-
-                    elif pilihan == 4:
-                        kelurahan_baru = input("Masukkan nama kelurahan baru: ").capitalize()
-                        if kelurahan_baru in data_kelurahan and kelurahan_baru.isalpha():
-                            data['Kelurahan'] = kelurahan_baru
-                            break
-                        else:
-                            print('Input tidak berupa huruf. Masukkan lagi')
-
-                    else:
-                        print("Pilihan tidak valid.")
-
-                    data['Status'] = cek_kemiskinan(data['Pendapatan'], data['Anggota_Keluarga'])  # Update status kemiskinan
-                    print(f"Data {nama} dengan ID {id_pilihan} berhasil diperbarui!\n")
-                    print(tabulate(database, headers='keys', tablefmt='fancy_grid', stralign='center'))
-                    return
+                pilihan = input_data("Opsi Perubahan (1-4)", "isdigit", "angka", data_kelurahan)
                 
-                except ValueError:
-                    print("ID harus sesuai! masukkan lagi\n")
+                if pilihan == 1:
+                    data['Nama'] = input_data("Nama Kepala Keluarga Baru", "isalpha", "huruf", data_kelurahan)
+                    data['ID'] = generate_rand_uniq_number(data['Nama'], database)
+                    print(f"Nama berhasil diperbarui menjadi {data['Nama']} dengan ID baru: {data['ID']}")
+                
+                elif pilihan == 2:
+                    data['Pendapatan'] = input_data("Total Pendapatan Rumah Tangga Bulanan", "isdigit", "angka", data_kelurahan)
+                
+                elif pilihan == 3:
+                    data['Anggota_Keluarga'] = input_data("Jumlah Anggota Keluarga", "isdigit", "angka", data_kelurahan)
+                    if data['Anggota_Keluarga'] > 0:
+                        data['Pendapatan_Perkapita'] = data['Pendapatan'] // data['Anggota_Keluarga']
+                    else:
+                        print("⚠️ Masukkan angka anggota keluarga yang sesuai")
+                
+                elif pilihan == 4:
+                    data['Kelurahan'] = input_data("Kelurahan", "isalpha", "huruf", data_kelurahan)
+                
+                else:
+                    print("⛔ Pilihan tidak valid. Masukkan angka 1-4.")
                     continue
-
-        konfirmasi = input(f"Apakah ingin mengubah data lagi? (y/n): ").lower()
-        if konfirmasi != 'y':
+                
+                data['Status'] = cek_kemiskinan(data['Pendapatan'], data['Anggota_Keluarga'])
+                print(f"Data {nama} dengan ID {id_pilihan} berhasil diperbarui!\n")
+                print(tabulate(database, headers='keys', tablefmt='fancy_grid', stralign='center'))
+                return
+        
+        if not konfirmasi("Apakah ingin mengubah data lagi? (y/n) "):
             break

@@ -19,13 +19,18 @@ def input_data(perintah, function, bentuk, data_kelurahan):
             print('Data Kelurahan: Hargorejo, Hargowilis, dan Sendangsari')
 
         text = input(f"Masukkan {perintah} hanya berupa {bentuk}: ").strip()
-        if perintah == 'Kelurahan' and function == 'isalpha' and text.isalpha():
-            if text.capitalize() not in data_kelurahan:
-                print(f"Input {perintah} tidak ada dalam daftar. Masukkan kembali ⚠️")
+        
+        if perintah in ['Nama Kepala Keluarga','Nama Kepala Keluarga Baru'] and function == 'isalpha':
+            if text.replace(" ", "").isalpha():
+                return text.title()
             else:
+                print(f"Input {perintah} tidak ada dalam daftar. Masukkan kembali ⚠️")
+        elif perintah == 'Kelurahan' and function == 'isalpha' and text.isalpha():
+            if text.capitalize() in data_kelurahan:
                 return text.capitalize()
-        elif perintah != 'Kelurahan' and function == 'isalpha' and text.isalpha():
-            return text.capitalize()
+            else:
+                print(f"Input {perintah} tidak ada dalam daftar. Masukkan kembali ⚠️")
+                
         elif function == 'isdigit' and text.isdigit():
             return int(text)
         else:
@@ -35,10 +40,10 @@ def tambah_data(database):
     while True: 
         data = {
             'ID' : '',
-            'Nama' : input_data('Nama_Kepala_Keluarga', 'isalpha', 'huruf', data_kelurahan),
+            'Nama' : input_data('Nama Kepala Keluarga', 'isalpha', 'huruf', data_kelurahan),
             'Kelurahan' : input_data('Kelurahan', 'isalpha', 'huruf', data_kelurahan),
-            'Anggota_Keluarga' : input_data('Anggota Keluarga', 'isdigit', 'angka', data_kelurahan),
-            'Pendapatan' : input_data('Total_Pendapatan_RumahTangga_Bulanan', 'isdigit', 'angka', data_kelurahan)}
+            'Anggota_Keluarga' : input_data('Jumlah Anggota Keluarga', 'isdigit', 'angka', data_kelurahan),
+            'Pendapatan' : input_data('Total Pendapatan Rumah Tangga Bulanan', 'isdigit', 'angka', data_kelurahan)}
         data['ID'] = generate_rand_uniq_number(data['Nama'], database)
         
         pendapatan = int(data['Pendapatan'])

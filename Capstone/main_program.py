@@ -1,13 +1,14 @@
 database = [
-    {'ID': 'RM07', 'Nama': 'Ramina', 'Kelurahan': 'Hargorejo', 'Pendapatan': 5000000, 'Anggota_Keluarga': 2, 'Status': 'Tidak Miskin', 'Pendapatan_Perkapita': 2500000},
-    {'ID': 'TO12', 'Nama': 'Toni', 'Kelurahan': 'Hargorejo', 'Pendapatan': 6000000, 'Anggota_Keluarga': 4, 'Status': 'Tidak Miskin', 'Pendapatan_Perkapita': 500000},
-    {'ID': 'HE72', 'Nama': 'Heru', 'Kelurahan': 'Hargowilis', 'Pendapatan': 4000000, 'Anggota_Keluarga': 4, 'Status': 'Tidak Miskin', 'Pendapatan_Perkapita': 1000000},
-    {'ID': 'YA56', 'Nama': 'Yanto', 'Kelurahan': 'Sendangsari', 'Pendapatan': 700000, 'Anggota_Keluarga': 2, 'Status': 'Miskin',  'Pendapatan_Perkapita': 350000},
-    {'ID': 'JO23', 'Nama': 'Jono', 'Kelurahan': 'Sendangsari', 'Pendapatan': 800000, 'Anggota_Keluarga': 2, 'Status': 'Miskin',  'Pendapatan_Perkapita': 400000},
-    {'ID': 'BU44', 'Nama': 'Budi', 'Kelurahan': 'Hargorejo', 'Pendapatan' : 1500000, 'Anggota_Keluarga' : 2, 'Status' : 'Tidak Miskin', 'Pendapatan_Perkapita' : 750000},
-    {'ID': 'AN05', 'Nama': 'Andi', 'Kelurahan': 'Hargowilis', 'Pendapatan' : 2000000, 'Anggota_Keluarga' : 2, 'Status' : 'Tidak Miskin', 'Pendapatan_Perkapita' : 1000000},
-    {'ID': 'KI06', 'Nama': 'Kirman', 'Kelurahan': 'Sendangsari', 'Pendapatan' : 3000000, 'Anggota_Keluarga' : 3, 'Status' : 'Tidak Miskin', 'Pendapatan_Perkapita' : 1000000},
-    {'ID': 'KA19', 'Nama': 'Karno', 'Kelurahan': 'Hargowilis', 'Pendapatan' : 800000, 'Anggota_Keluarga' : 3, 'Status' : 'Miskin', 'Pendapatan_Perkapita' : 266666}    
+    {'ID': 'RM07', 'Nama': 'Ramina', 'Kelurahan': 'Hargorejo', 'Pendapatan': 5000000, 'Anggota_Keluarga': 2, 'Pendapatan_Perkapita': 2500000, 'Status': 'Tidak Miskin'},
+    {'ID': 'TO12', 'Nama': 'Toni', 'Kelurahan': 'Hargorejo', 'Pendapatan': 6000000, 'Anggota_Keluarga': 4, 'Pendapatan_Perkapita': 500000, 'Status': 'Tidak Miskin'},
+    {'ID': 'HE72', 'Nama': 'Heru', 'Kelurahan': 'Hargowilis', 'Pendapatan': 4000000, 'Anggota_Keluarga': 4, 'Pendapatan_Perkapita': 1000000, 'Status': 'Tidak Miskin'},
+    {'ID': 'YA56', 'Nama': 'Yanto', 'Kelurahan': 'Sendangsari', 'Pendapatan': 700000, 'Anggota_Keluarga': 2, 'Pendapatan_Perkapita': 350000, 'Status': 'Miskin' },
+    {'ID': 'JO23', 'Nama': 'Jono', 'Kelurahan': 'Sendangsari', 'Pendapatan': 800000, 'Anggota_Keluarga': 2, 'Pendapatan_Perkapita': 400000, 'Status': 'Miskin' },
+    {'ID': 'BU44', 'Nama': 'Budi', 'Kelurahan': 'Hargorejo', 'Pendapatan' : 1500000, 'Anggota_Keluarga' : 2, 'Pendapatan_Perkapita' : 750000, 'Status' : 'Tidak Miskin'},
+    {'ID': 'AN05', 'Nama': 'Andi', 'Kelurahan': 'Hargowilis', 'Pendapatan' : 2000000, 'Anggota_Keluarga' : 2, 'Pendapatan_Perkapita' : 1000000, 'Status' : 'Tidak Miskin'},
+    {'ID': 'KI06', 'Nama': 'Kirman', 'Kelurahan': 'Sendangsari', 'Pendapatan' : 3000000, 'Anggota_Keluarga' : 3, 'Pendapatan_Perkapita' : 1000000, 'Status' : 'Tidak Miskin'},
+    {'ID': 'KA19', 'Nama': 'Karno', 'Kelurahan': 'Hargowilis', 'Pendapatan' : 800000, 'Anggota_Keluarga' : 3, 'Pendapatan_Perkapita' : 266666, 'Status' : 'Miskin'},    
+    {'ID': 'BU17', 'Nama': 'Budianto', 'Kelurahan': 'Sendangsari', 'Pendapatan':2300000, 'Anggota_Keluarga': 5, 'Pendapatan_Perkapita': 460000, 'Status': 'Tidak Miskin'}
 ]
 
 data_kelurahan = ['Hargorejo', 'Hargowilis', 'Sendangsari']
