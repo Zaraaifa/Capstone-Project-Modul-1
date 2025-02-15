@@ -3,11 +3,12 @@ from .fungsi_confirm import konfirmasi
 
 def hapus_data(database):
     while True:
+        print(tabulate(database, headers='keys', tablefmt='fancy_grid', stralign='center'))
         nama = input("Masukkan nama yang ingin dihapus: ").capitalize()
-        matched_data = [data for data in database if data['Nama'] == nama]
+        matched_data = [data for data in database if nama in data['Nama']]
 
         if not matched_data:
-            print("\n⚠️ Nama tidak ditemukan. Masukkan lagi\n")
+            print("\n\u26A0 Nama tidak ditemukan. Masukkan lagi\n")
             continue
 
         print("\nData yang ditemukan:")
@@ -17,15 +18,19 @@ def hapus_data(database):
         data_ditemukan = False
         for data in matched_data:
             if data['ID'].upper() == id_pilihan:
-                from .fungsi_restore import recycle_bin
-                recycle_bin.append(data)  # Pindahkan ke recycle bin
-                database.remove(data)  # Hapus dari database utama
-                print(f"Data dengan ID {id_pilihan} berhasil dihapus dan masuk ke Recycle Bin!🗑️\n\n")
-                data_ditemukan = True
-                break
+                if konfirmasi(f"\nApakah yakin ingin menghapus data dengan ID {id_pilihan}? (y/n): "):
+                    from .fungsi_restore import recycle_bin
+                    recycle_bin.append(data)  # Pindahkan ke recycle bin
+                    database.remove(data)  # Hapus dari database utama
+                    print(f"Data dengan ID {id_pilihan} berhasil dihapus dan masuk ke Recycle Bin!🗑️\n\n")
+                    data_ditemukan = True
+                    break
+                else:
+                    print("Data batal dihapus.\n")
+
         if not data_ditemukan: 
-                print("❌ ID tidak ditemukan dalam daftar. Masukkan lagi\n")
+                print("\n\u274C ID tidak ditemukan dalam daftar. Masukkan lagi\n")
 
         
         if not konfirmasi("Apakah ingin menghapus data lagi? (y/n): "):
-           return
+            return

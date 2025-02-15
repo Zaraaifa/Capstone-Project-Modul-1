@@ -1,4 +1,6 @@
 from tabulate import tabulate
+from .fungsi_confirm import konfirmasi
+from .fungsi_add import input_data
 recycle_bin = []
 
 def tampilkan_recycle_bin():
@@ -10,31 +12,30 @@ def tampilkan_recycle_bin():
 
 def restore_data(database):
     if not recycle_bin:
-        print("\n🗑️ Recycle Bin kosong. Tidak ada data untuk dikembalikan.\n")
+        print("\n\U0001F5D1 Recycle Bin kosong. Tidak ada data untuk dikembalikan.\n")
         return
 
     tampilkan_recycle_bin()
     
     try:
-        id_pilihan = input("Masukkan ID data yang ingin dikembalikan: ").upper().strip()
+        id_pilihan = input_data("Nama Kepala Keluarga", "isalnum", "angka")
     except ValueError:
-        print("⚠️ID harus sesuai dan tanpa spasi. Masukkan lagi!\n")
+        print("\n\u26A0 ID harus sesuai dan tanpa spasi. Masukkan lagi!\n")
         return
 
     for data in recycle_bin:
-        konfirmasi = input(f"Apakah ingin mengembalikan data dengan ID {id_pilihan}? (y/n): ").lower()
-        if konfirmasi == 'y':
+        if konfirmasi(f"Apakah yakin ingin mengembalikan data dengan ID {id_pilihan}? (y/n): ") == 'y':
             if data['ID'] == id_pilihan:
                 database.append(data)  # Kembalikan ke database utama
                 recycle_bin.remove(data)  # Hapus dari recycle bin
-                print(f"Data dengan ID {id_pilihan} berhasil dikembalikan! ♻️\n")
+                print(f"\n\u267B Data dengan ID {id_pilihan} berhasil dikembalikan!\n")
                 return
             else:
                 print("ID tidak ditemukan di Recycle Bin.\n")
         elif konfirmasi == 'n':
             print("Data tidak dikembalikan.\n")
         else:
-            print("⛔ Pilihan tidak valid. Masukkan hanya y atau n!\n")
+            print("\n\u26A0 Pilihan tidak valid. Masukkan hanya y atau n!\n")
 
 
 

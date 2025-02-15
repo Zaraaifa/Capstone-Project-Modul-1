@@ -1,5 +1,12 @@
 from tabulate import tabulate
 from .fungsi_confirm import konfirmasi
+from rich.console import Console
+from rich.table import Table
+from rich import print
+from rich.prompt import Confirm
+
+
+console = Console()
 
 def calculate_data(database):
     if not database:
@@ -28,19 +35,26 @@ def show_dashboard(database):
     
     max_pendapatan, min_pendapatan, persen_miskin, persen_tidak_miskin, jumlah_terdata = calculate_data(database)
 
-    summary_table = [
-        ["Max Pendapatan", f"Rp {max_pendapatan:,}"],
-        ["Min Pendapatan", f"Rp {min_pendapatan:,}"],
-        ["Persentase Miskin", f"{persen_miskin:.2f}%"],
-        ["Persentase Tidak Miskin", f"{persen_tidak_miskin:.2f}%"]
-    ]
+    summary_table = Table(title="[bold]Rangkuman Data Kemiskinan Kabupaten Kulon Progo 2024/2025", show_header=True, header_style="bold blue", style="dim")
+    summary_table.add_column("Keterangan", justify="center", style="bold cyan")
+    summary_table.add_column("Nilai", justify="center", style="bold")
 
-    print("\nRANGKUMAN DATA KEMISKINAN KABUPATEN KULONPROGO 2024/2025")
-    print(tabulate(summary_table, tablefmt='fancy_grid', stralign='center'))
+    summary_table.add_row("Max Pendapatan", f"Rp {max_pendapatan:,}")
+    summary_table.add_row("Min Pendapatan", f"Rp {min_pendapatan:,}")
+    summary_table.add_row("Persentase Miskin", f"{persen_miskin:.2f}%")
+    summary_table.add_row("Persentase Tidak Miskin", f"{persen_tidak_miskin:.2f}%")
 
-    kelurahan_table = [[kel, jumlah] for kel, jumlah in jumlah_terdata.items()]
-    print("\nJUMLAH MASYARAKAT TERDATA DI TIAP KELURAHAN\n")
-    print(tabulate(kelurahan_table, headers=["Kelurahan", "Jumlah"], tablefmt="fancy_grid"))
+    console.print(summary_table)
+
+    kelurahan_table = Table(title="[bold]Jumlah Masyarakat Terdata di Tiap Kelurahan", show_header=True, header_style="bold", style="dim")
+    kelurahan_table.add_column("Kelurahan", style="bold cyan")
+    kelurahan_table.add_column("Jumlah", justify="center", style="bold green")
+
+    kelurahan_data = [[kel, jumlah] for kel, jumlah in jumlah_terdata.items()]
+    for kel, jumlah in kelurahan_data:
+        kelurahan_table.add_row(kel, f"{jumlah}")
+
+    console.print(kelurahan_table)
 
     if not konfirmasi("Apakah ingin kembali ke menu utama? (y/n) "):
         show_dashboard(database)

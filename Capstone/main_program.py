@@ -1,3 +1,10 @@
+from rich.console import Console
+from rich.table import Table
+from rich.panel import Panel
+from rich import print
+
+console = Console()
+
 database = [
     {'ID': 'RM07', 'Nama': 'Ramina', 'Kelurahan': 'Hargorejo', 'Pendapatan': 5000000, 'Anggota_Keluarga': 2, 'Pendapatan_Perkapita': 2500000, 'Status': 'Tidak Miskin'},
     {'ID': 'TO12', 'Nama': 'Toni', 'Kelurahan': 'Hargorejo', 'Pendapatan': 6000000, 'Anggota_Keluarga': 4, 'Pendapatan_Perkapita': 500000, 'Status': 'Tidak Miskin'},
@@ -18,20 +25,31 @@ from tabulate import tabulate
 
 def menu():
     while True:
-        print("""\nSelamat Datang di Program Data Kemiskinan Kabupaten Kulon Progo!
-        Menu:
-        1. Tambah Data
-        2. Update Data
-        3. Hapus Data
-        4. Tampilkan Data
-        5. Kembalikan Data yang Terhapus
-        6. Cek Status Kemiskinan
-        7. Tampilkan dashboard
-        8. Keluar
-        """)
+        header = "[bold green]Selamat Datang di Program Data Kemiskinan Kabupaten Kulon Progo![/bold green]"
+        console.print(Panel(header, style="underline", expand=False))
+        table = Table(show_header=True, header_style="bold blue", style="dim", show_lines=True)
+        table.add_column("No", justify="center", style="bold cyan")
+        table.add_column("Menu", style="bold")
+
+        menu_items = [
+            ("1", "Tambah Data"),
+            ("2", "Update Data"),
+            ("3", "Hapus Data"),
+            ("4", "Tampilkan Data"),
+            ("5", "Kembalikan Data yang Terhapus"),
+            ("6", "Cek Status Kemiskinan"),
+            ("7", "Tampilkan Dashboard"),
+            ("8", "Keluar")
+        ]
+
+        for item in menu_items:
+            table.add_row(item[0], item[1])
+        
+        console.print(table)
 
         try:
-            pilihan = int(input("Pilih opsi (1/2/3/4/5/6/7/8): "))
+            pilihan = int(input("Pilih opsi (1-8): "))
+            
             if pilihan == 1:
                 fa.tambah_data(database)
             elif pilihan == 2:
@@ -47,10 +65,10 @@ def menu():
             elif pilihan == 7:
                 fo.show_dashboard(database)
             elif pilihan == 8:
-                print("Terima kasih! Program selesai.")
+                console.print("\nTerima kasih! Program selesai.")
                 break
             else:
-                print("Pilihan tidak valid.\n")
+                print("\nPilihan tidak valid. Hanya masukkan 1-8!\n")
         except ValueError:
             print("Input harus berupa angka. Masukkan kembali.\n")
             continue 

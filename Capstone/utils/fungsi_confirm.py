@@ -3,4 +3,4 @@ def konfirmasi(prompt):
         value = input(prompt).strip().lower()
         if value in ["y", "n"]:
             return value in ["y"]
-        print("❌Input tidak valid. Masukkan 'y' atau 'n'.")
+        print("\n\u26A0 Input tidak valid. Masukkan 'y' atau 'n'.")
