@@ -12,14 +12,14 @@ def cek_status(database):
         for data in database:
             if data['Nama'].capitalize() == nama.capitalize():
                 status = cek_kemiskinan(data['Pendapatan'], data['Anggota_Keluarga'])
-                print("✅ Data berhasil ditemukan\n")
+                print("\n\u2705 Data berhasil ditemukan\n")
                 print(f"Hasil Cek Status kemiskinan {nama}: {data['Status']}\n")
                 if not konfirmasi("Apakah ingin cek status lain? (y/n)"):
-                    print("Kembali ke menu utama ⏳")
+                    print("\n\u21A9 Kembali ke menu utama")
                     return
 
             elif nama not in data['Nama'].capitalize():
-                print("📢 Data belum ada di database.")
+                print("\n\U0001F4E2 Data belum ada di database.")
                 if konfirmasi("Apakah ingin menambahkan data ke database? (y/n) "):
                     from fungsi_add import tambah_data
                     tambah_data(database)

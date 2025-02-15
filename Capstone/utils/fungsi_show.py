@@ -1,4 +1,5 @@
 from tabulate import tabulate
+from .fungsi_confirm import konfirmasi
 
 data_kelurahan = ['Hargorejo', 'Hargowilis', 'Sendangsari']
 def tampilkan_data(database):
@@ -32,7 +33,6 @@ def tampilkan_data(database):
 
             if kelurahan is None:
                 print("Pilihan kelurahan tidak valid.")
-                continue  # Kembali ke awal loop
 
         elif pilihan == "2":
             print("\nPilih status kemiskinan yang ingin ditampilkan:")
@@ -49,8 +49,7 @@ def tampilkan_data(database):
             status_kemiskinan = status_dict.get(status_pilihan)
 
             if status_kemiskinan is None:
-                print("Pilihan status tidak valid.")
-                continue  
+                print("Pilihan status tidak valid.")  
 
         elif pilihan == '3':
             if len(database) == 0:
@@ -63,9 +62,9 @@ def tampilkan_data(database):
                 print(tabulate(database, headers='keys', tablefmt='fancy_grid', stralign='center'))
                 print(f"""Persentase Miskin = {(jmlh_miskin/len(database)*100):.2f}%
 Persentase Tidak Miskin = {(jmlh_tidak_miskin/len(database)*100):.2f}%""")
-                return 
+ 
         else:
-            print("❌Pilihan tidak valid.")
+            print("\n\u26A0 Pilihan tidak valid.")
             continue  # Kembali ke awal loop
 
         # Filter data 
@@ -87,9 +86,8 @@ Persentase Tidak Miskin = {(jmlh_tidak_miskin/len(database)*100):.2f}%""")
 Persentase Tidak Miskin = {(jmlh_tidak_miskin/len(filtered_data)*100):.2f}%""")
 
         # Tanya user apakah ingin mencari data lagi
-        ulang = input("\nApakah ingin menampilkan data lagi? (y/n): ").lower()
-        if ulang != "y":
-            print("Kembali ke menu utama ⏳\n")
-            from main_program import menu
-            menu()
+        if not konfirmasi("\n Apakah Anda ingin mencari data lagi? (y/n) "):
+            print("\n\u21A9 Kembali ke menu utama\n")
+            return
+
             
