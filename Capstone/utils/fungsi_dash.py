@@ -9,6 +9,22 @@ from rich.prompt import Confirm
 console = Console()
 
 def calculate_data(database):
+    """
+    Menghitung data-data yang diperlukan untuk menampilkan dashboard
+
+    Berisi informasi tentang:
+    1. Max Pendapatan
+    2. Min Pendapatan
+    3. Persentase Miskin
+    4. Persentase Tidak Miskin
+    5. Jumlah Masyarakat Terdata di Tiap Kelurahan
+
+    Jika tidak ada data yang tersimpan, maka akan mengembalikan None
+
+    :param database: list of dict yang berisi data-data kemiskinan
+    :return: tuple of 5 values yang berisi data-data yang dihitung
+    """
+    
     if not database:
         print("Tidak ada data yang tersimpan.")
         return None
@@ -29,6 +45,18 @@ def calculate_data(database):
     return max_pendapatan, min_pendapatan, persen_miskin, persen_tidak_miskin, jumlah_terdata
 
 def show_dashboard(database):
+    """
+    Fungsi untuk menampilkan dashboard data kemiskinan Kabupaten Kulon Progo 2024/2025.
+    
+    Dashboard ini berisi informasi tentang:
+    1. Max Pendapatan
+    2. Min Pendapatan
+    3. Persentase Miskin
+    4. Persentase Tidak Miskin
+    5. Jumlah Masyarakat Terdata di Tiap Kelurahan
+
+    Jika pengguna memilih untuk kembali ke menu utama, maka program akan kembali ke menu utama.
+    """
     hasil = calculate_data(database)
     if hasil is None:
         return

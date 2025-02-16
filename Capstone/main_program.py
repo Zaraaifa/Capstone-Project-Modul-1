@@ -6,7 +6,7 @@ from rich import print
 console = Console()
 
 database = [
-    {'ID': 'RM07', 'Nama': 'Ramina', 'Kelurahan': 'Hargorejo', 'Pendapatan': 5000000, 'Anggota_Keluarga': 2, 'Pendapatan_Perkapita': 2500000, 'Status': 'Tidak Miskin'},
+    {'ID': 'RA07', 'Nama': 'Ramina', 'Kelurahan': 'Hargorejo', 'Pendapatan': 5000000, 'Anggota_Keluarga': 2, 'Pendapatan_Perkapita': 2500000, 'Status': 'Tidak Miskin'},
     {'ID': 'TO12', 'Nama': 'Toni', 'Kelurahan': 'Hargorejo', 'Pendapatan': 6000000, 'Anggota_Keluarga': 4, 'Pendapatan_Perkapita': 500000, 'Status': 'Tidak Miskin'},
     {'ID': 'HE72', 'Nama': 'Heru', 'Kelurahan': 'Hargowilis', 'Pendapatan': 4000000, 'Anggota_Keluarga': 4, 'Pendapatan_Perkapita': 1000000, 'Status': 'Tidak Miskin'},
     {'ID': 'YA56', 'Nama': 'Yanto', 'Kelurahan': 'Sendangsari', 'Pendapatan': 700000, 'Anggota_Keluarga': 2, 'Pendapatan_Perkapita': 350000, 'Status': 'Miskin' },
@@ -24,6 +24,25 @@ from utils import fungsi_add as fa, fungsi_update as fu, fungsi_delete as fd, fu
 from tabulate import tabulate
 
 def menu():
+    """
+    Fungsi untuk menampilkan menu utama program. Fungsi ini akan terus berjalan
+    hingga pengguna memilih opsi 8 (Keluar).
+
+    Menu yang tersedia adalah:
+        1. Tambah Data
+        2. Update Data
+        3. Hapus Data
+        4. Tampilkan Data
+        5. Kembalikan Data yang Terhapus
+        6. Cek Status Kemiskinan
+        7. Tampilkan Dashboard
+        8. Keluar
+
+    Jika pengguna memilih opsi yang tidak valid, maka program akan menampilkan
+    pesan kesalahan dan meminta input kembali.
+
+    :return: None
+    """
     while True:
         header = "[bold green]Selamat Datang di Program Data Kemiskinan Kabupaten Kulon Progo![/bold green]"
         console.print(Panel(header, style="underline", expand=False))
@@ -66,11 +85,11 @@ def menu():
                 fo.show_dashboard(database)
             elif pilihan == 8:
                 console.print("\nTerima kasih! Program selesai.")
-                break
-            else:
+                break  #keluar dari loop menu()
+            else: 
                 print("\nPilihan tidak valid. Hanya masukkan 1-8!\n")
         except ValueError:
             print("Input harus berupa angka. Masukkan kembali.\n")
-            continue 
+            continue  #meminta input ulang jika bukan angka
 
 menu()

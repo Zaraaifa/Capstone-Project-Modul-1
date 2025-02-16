@@ -6,6 +6,20 @@ from tabulate import tabulate
 data_kelurahan = ['Hargorejo', 'Hargowilis', 'Sendangsari']
 
 def update_data(database):
+    """
+    Fungsi untuk mengupdate data di database berdasarkan ID yang dimasukkan oleh pengguna.
+
+    Fungsi ini akan menampilkan data yang sesuai dengan nama yang dimasukkan oleh pengguna. Jika data ditemukan, maka pengguna akan diminta memasukkan ID data yang ingin diubah.
+    Jika ID yang dimasukkan sesuai dengan data yang ditemukan, maka pengguna akan diminta memasukkan
+    pilihan perubahan (1-4): Update Nama Kepala Keluarga, Update Pendapatan Total Rumah Tangga Bulanan,
+    Update Jumlah Anggota Keluarga, atau Update Kelurahan.
+
+    Jika pilihan perubahan sesuai dengan data yang ditemukan, maka data akan diperbarui dan status kemiskinan akan dihitung ulang berdasarkan data yang diperbarui.
+    Jika pilihan tidak valid, maka pengguna akan diminta memasukkan pilihan kembali.
+
+    :param database: List of dictionary yang berisi data kemiskinan
+    :return: None
+    """
     while True:
         print(tabulate(database, headers='keys', tablefmt='fancy_grid', stralign='center'))
         nama_cek = input_data('Nama Kepala Keluarga', 'isalpha', 'huruf', data_kelurahan)
@@ -15,10 +29,10 @@ def update_data(database):
         matched_data = [data for data in database if nama_cek in data['Nama']]
         
         if not matched_data:
-            print("\n\u274C Nama tidak ditemukan. Masukkan kembali\n")
+            print("\nNama tidak ditemukan. Masukkan kembali\n")
             continue
         
-        print("\n\u2705 Data ditemukan ")
+        print("\nData ditemukan ")
         print(tabulate(matched_data, headers="keys", tablefmt="fancy_grid", stralign="center"))
         
         id_pilihan = input("Masukkan ID data yang ingin diubah: ").upper().strip()
@@ -51,13 +65,13 @@ def update_data(database):
                     if data['Anggota_Keluarga'] > 0:
                         data['Pendapatan_Perkapita'] = data['Pendapatan'] // data['Anggota_Keluarga']
                     else:
-                        print("\n\u26A0 Masukkan angka anggota keluarga yang sesuai")
+                        print("\nMasukkan angka anggota keluarga yang sesuai")
                 
                 elif pilihan == 4:
                     data['Kelurahan'] = input_data("Kelurahan", "isalpha", "huruf", data_kelurahan)
                 
                 else:
-                    print("\u26A0 Pilihan tidak valid. Masukkan angka 1-4.")
+                    print("\nPilihan tidak valid. Masukkan angka 1-4.")
                     continue
                 
                 data['Status'] = cek_kemiskinan(data['Pendapatan'], data['Anggota_Keluarga'])

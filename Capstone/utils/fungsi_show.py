@@ -3,6 +3,16 @@ from .fungsi_confirm import konfirmasi
 
 data_kelurahan = ['Hargorejo', 'Hargowilis', 'Sendangsari']
 def tampilkan_data(database):
+    """
+    Menampilkan data dalam database dengan filter berdasarkan kelurahan
+    atau status kemiskinan.
+
+    Parameters:
+    database (list): Data yang akan ditampilkan
+
+    Returns:
+    None
+    """
     while True:
         print("\nPilih tampilan data:")
         print("1. Tampilkan berdasarkan data Kelurahan")
@@ -64,7 +74,7 @@ def tampilkan_data(database):
 Persentase Tidak Miskin = {(jmlh_tidak_miskin/len(database)*100):.2f}%""")
  
         else:
-            print("\n\u26A0 Pilihan tidak valid.")
+            print("\nPilihan tidak valid.")
             continue  # Kembali ke awal loop
 
         # Filter data 
@@ -87,7 +97,7 @@ Persentase Tidak Miskin = {(jmlh_tidak_miskin/len(filtered_data)*100):.2f}%""")
 
         # Tanya user apakah ingin mencari data lagi
         if not konfirmasi("\n Apakah Anda ingin mencari data lagi? (y/n) "):
-            print("\n\u21A9 Kembali ke menu utama\n")
+            print("\nKembali ke menu utama\n")
             return
 
             
