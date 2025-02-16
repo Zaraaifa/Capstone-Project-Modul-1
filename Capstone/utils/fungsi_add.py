@@ -23,7 +23,7 @@ def generate_rand_uniq_number(nama, database):
         random_number = str(random.randint(1,99)).zfill(2)  #random 1-99 ketika hanya 1 digit ditambahkan 0 didepannya
         id_baru = f"{nama[:2].upper()}{random_number}"
         if id_baru not in exisiting_ids:
-            return id_baru
+            return id_baru  #ID yang dibuat berupa 2 huruf dari kata pertama "Nama" dan 2 angka random
 
 def input_data(perintah, function, bentuk, data_kelurahan):
     """
@@ -44,23 +44,23 @@ def input_data(perintah, function, bentuk, data_kelurahan):
             print('\nData Kelurahan: Hargorejo, Hargowilis, dan Sendangsari')
 
         text = input(f"\nMasukkan {perintah} hanya berupa {bentuk}. Tekan '0' jika ingin batal: ").strip()  
-        
-        if text == "0":
-            print("\nBatal, Kembali ke menu utama ")
-            return None
+        if function == 'isalnum' and text.isalnum():
+            return text.upper() # validasi ID dan mengembalikan text ke bentuk uppercase
+        elif text == "0":
+            print("\nBatal, Kembali ke menu utama... ")
+            return None  # kembali ke menu utama
         
         elif perintah in ['Nama Kepala Keluarga','Nama Kepala Keluarga Baru'] and function == 'isalpha':
             if re.fullmatch(r'^[a-zA-Z ]+$', text):  #validasi huruf dan spasi pada input Nama
                 return text.title()
         elif perintah == 'Kelurahan' and function == 'isalpha' and text.isalpha():
             if text.capitalize() in data_kelurahan:  
-                return text.capitalize()
+                return text.capitalize()  # validasi huruf pada input Kelurahan dan mengembalikan text ke bentuk capitalize
             else:
                 print(f"\nInput {perintah} tidak ada dalam daftar. Masukkan kembali.")
         elif function == 'isdigit' and text.isdigit():
-            return int(text)
-        elif function == 'isalnum' and text.isalnum():
-            return text.upper()
+            return int(text)  # validasi angka dan mengembalikan text ke tipe integer
+
         
         print(f"\nInput {perintah} harus berupa {bentuk}. Masukkan kembali.")
 

@@ -15,7 +15,7 @@ def cek_kemiskinan(pendapatan, anggota_keluarga):
     """
 
     batas_pendapatan_kulonprogo = 416870  # Batas pendapatan sesuai dengan batas kemiskinan Kab. Kulon Progo
-    return 'Miskin' if (pendapatan/anggota_keluarga) < batas_pendapatan_kulonprogo else 'Tidak Miskin'
+    return 'Miskin' if (pendapatan/anggota_keluarga) < batas_pendapatan_kulonprogo else 'Tidak Miskin'  # Jika pendapatan perkapita kurang dari batas kemiskinan, maka status kemiskinan adalah "Miskin", jika sebaliknya maka status kemiskinan adalah "Tidak Miskin"
 
 def cek_status(database):
     """
@@ -55,5 +55,5 @@ def cek_status(database):
 
         if not konfirmasi("Apakah ingin cek status lain? (y/n): "):
             print("\nKembali ke menu utama")
-            break
+            return # kembali ke menu utama
 

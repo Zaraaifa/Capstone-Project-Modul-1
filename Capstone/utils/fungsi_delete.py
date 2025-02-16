@@ -1,5 +1,7 @@
 from tabulate import tabulate 
 from .fungsi_confirm import konfirmasi
+from .fungsi_add import input_data
+data_kelurahan = ['Hargorejo', 'Hargowilis', 'Sendangsari']
 
 def hapus_data(database):
     """
@@ -24,12 +26,15 @@ def hapus_data(database):
         print("\nData yang ditemukan:")
         print(tabulate(matched_data, headers="keys", tablefmt="fancy_grid", stralign="center"))
 
-        id_pilihan = input("Masukkan ID data yang ingin dihapus: ").upper()
+        id_pilihan = input_data("ID Data yang ingin dihapus", "isalnum", "angka", data_kelurahan) # memanggil fungsi input_data
+        if id_pilihan == "0":
+            return
+        
         data_ditemukan = False
         for data in matched_data:
             if data['ID'].upper() == id_pilihan:
-                if konfirmasi(f"\nApakah yakin ingin menghapus data dengan ID {id_pilihan}? (y/n): "):
-                    from .fungsi_restore import recycle_bin
+                if konfirmasi(f"\nApakah yakin ingin menghapus data dengan ID {id_pilihan}? (y/n): "):  # memanggil fungsi konfirmasi
+                    from .fungsi_restore import recycle_bin     # import recycle bin di lokal
                     recycle_bin.append(data)  # Pindahkan ke recycle bin
                     database.remove(data)  # Hapus dari database utama
                     print(f"Data dengan ID {id_pilihan} berhasil dihapus dan masuk ke Recycle Bin!\n")
@@ -42,5 +47,5 @@ def hapus_data(database):
             print("\nID tidak ditemukan dalam daftar. Masukkan lagi\n")
 
         
-        if not konfirmasi("Apakah ingin menghapus data lagi? (y/n): "):
+        if not konfirmasi("Apakah ingin menghapus data lagi? (y/n): "):  # memanggil fungsi konfirmasi
             return

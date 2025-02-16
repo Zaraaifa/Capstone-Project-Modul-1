@@ -9,7 +9,7 @@ def konfirmasi(prompt):
     bool: True jika pengguna memasukkan 'y', False jika pengguna memasukkan 'n'
     """
     while True:
-        value = input(prompt).strip().lower()
+        value = input(prompt).strip().lower() 
         if value in ["y", "n"]:
             return value in ["y"]
         print("\nInput tidak valid. Masukkan 'y' atau 'n'.")

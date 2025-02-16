@@ -2,7 +2,9 @@ from tabulate import tabulate
 from .fungsi_confirm import konfirmasi
 from .fungsi_add import input_data
 
-recycle_bin = []
+data_kelurahan = ['Hargorejo', 'Hargowilis', 'Sendangsari']
+
+recycle_bin = [] # inisiasi dict untuk menampung data-data yang dihapus
 
 def tampilkan_recycle_bin():
     """
@@ -30,17 +32,17 @@ def restore_data(database):
         print("\nRecycle Bin kosong. Tidak ada data untuk dikembalikan.\n")
         input("Tekan enter untuk kembali ke menu utama...")
         return #langsung kembali ke menu utama
-    
-    from main_program import data_kelurahan
 
     while True: 
         tampilkan_recycle_bin()
                 
         try:
             id_pilihan = input_data("ID Data yang ingin di restore", "isalnum", "angka", data_kelurahan)
+            if id_pilihan == "0":
+                return
         except ValueError:
             print("\nID harus sesuai dan tanpa spasi. Masukkan lagi!\n")
-            continue #untuk meminta input ulang jika ID tidak sesuai
+            continue # untuk meminta input ulang jika ID tidak sesuai
 
         data_ditemukan = None  # menandai apakah ID ditemukan di reciycle Bin
 
@@ -65,4 +67,4 @@ def restore_data(database):
             print("\nKembali ke menu utama...\n")
             break  #keluar loop dan kembali ke menu utama
 
-    return #memastikan fungsi keluar setelah restore selesai dijalankan
+    return # memastikan fungsi keluar setelah restore selesai dijalankan

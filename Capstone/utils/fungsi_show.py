@@ -56,7 +56,7 @@ def tampilkan_data(database):
                 "TM": "Tidak Miskin"
             }
 
-            status_kemiskinan = status_dict.get(status_pilihan)
+            status_kemiskinan = status_dict.get(status_pilihan)  # Mendapatkan status kemiskinan
 
             if status_kemiskinan is None:
                 print("Pilihan status tidak valid.")  
@@ -64,7 +64,7 @@ def tampilkan_data(database):
         elif pilihan == '3':
             if len(database) == 0:
                 print("Tidak ada data yang tersimpan.\n")
-                return
+                return  # Jika database kosong, keluar dari loop
             else:
                 jmlh_miskin = sum(1 for data in database if data['Status'] == 'Miskin')
                 jmlh_tidak_miskin = sum(1 for data in database if data['Status'] == 'Tidak Miskin')
@@ -91,13 +91,13 @@ Persentase Tidak Miskin = {(jmlh_tidak_miskin/len(database)*100):.2f}%""")
             jmlh_tidak_miskin = sum(1 for data in filtered_data if data['Status'] == 'Tidak Miskin')
 
             print("\nDATA STATUS KEMISKINAN KABUPATEN KULONPROGO 2024/2025\n")
-            print(tabulate(filtered_data, headers='keys', tablefmt='fancy_grid', stralign='center'))
+            print(tabulate(filtered_data, headers='keys', tablefmt='fancy_grid', stralign='center'))  # Menampilkan data
             print(f"""Persentase Miskin = {(jmlh_miskin/len(filtered_data)*100):.2f}%
-Persentase Tidak Miskin = {(jmlh_tidak_miskin/len(filtered_data)*100):.2f}%""")
+Persentase Tidak Miskin = {(jmlh_tidak_miskin/len(filtered_data)*100):.2f}%""")  # Menampilkan persentase kemiskinan
 
         # Tanya user apakah ingin mencari data lagi
         if not konfirmasi("\n Apakah Anda ingin mencari data lagi? (y/n) "):
             print("\nKembali ke menu utama\n")
-            return
+            return  # Kembali ke menu utama
 
             
