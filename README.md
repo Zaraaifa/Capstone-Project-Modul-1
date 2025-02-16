@@ -73,7 +73,7 @@ Data disimpan dalam format JSON. Berikut adalah contoh struktur data dalam `data
   },
   {
     "ID": "TO12",
-    "Nama": "Toni",
+    "Nama": "Toni Sutono",
     "Kelurahan": "Hargorejo",
     "Pendapatan": 6000000,
     "Anggota_Keluarga": 4,
