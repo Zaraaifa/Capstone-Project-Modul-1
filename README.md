@@ -79,6 +79,8 @@ Data disimpan dalam format JSON. Berikut adalah contoh struktur data dalam `data
     "Pendapatan_Perkapita": 500000,
     "Status": "Tidak Miskin"
   }
+...
+]
 
 
 ## 👨‍💻 Kontributor Abdillah Zaraaifa Al Farisa
