@@ -78,8 +78,8 @@ Data disimpan dalam format JSON. Berikut adalah contoh struktur data dalam `data
     "Anggota_Keluarga": 4,
     "Pendapatan_Perkapita": 500000,
     "Status": "Tidak Miskin"
-  }
-...
+  },
+  ...
 ]
 
 
