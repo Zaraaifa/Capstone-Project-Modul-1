@@ -1,4 +1,5 @@
-# Database Kemiskinan Kabupaten Kulon Progo
+# Aplikasi Database Kemiskinan Kabupaten Kulon Progo
+Program ini hanya berfungsi untuk membantu administrator kelurahan dalam manajemen data kemiskinan.
 
 ## 📌 Deskripsi
 Program ini adalah sistem manajemen data kemiskinan di Kabupaten Kulon Progo. Program ini memungkinkan pengguna untuk menambah, memperbarui, menghapus, menampilkan, serta mengembalikan data yang telah terhapus (restore). Selain itu, terdapat fitur untuk mengecek status kemiskinan dan menampilkan dashboard analisis.
